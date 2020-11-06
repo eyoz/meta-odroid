@@ -24,6 +24,8 @@ BRANCH_odroid-c4-hardkernel = "odroidg12-v2015.01"
 BRANCH_odroid-n2-hardkernel = "odroidn2-v2015.01"
 BRANCH_odroid-n2 = "odroidn2-v2015.01"
 
+UBOOT_INITIAL_ENV = ""
+
 COMMON_SRC_URI = "git://github.com/hardkernel/u-boot.git;branch=${BRANCH}"
 
 SRC_URI_odroid-c2 = "${COMMON_SRC_URI} \
@@ -129,7 +131,6 @@ do_configure_odroid-c4-hardkernel_append() {
 
 do_compile_odroid-c4-hardkernel () {
 	CROSS_COMPILE=aarch64-elf- ARCH=arm CFLAGS="" LDFLAGS="" oe_runmake
-	touch u-boot-initial-env
 }
 
 do_compile_odroid-n2-hardkernel () {
