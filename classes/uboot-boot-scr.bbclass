@@ -17,8 +17,6 @@
 #
 # UBOOT_BOOTARGS: 
 #
-# UBOOT_BOOTDEV: default boot device #
-#
 # UBOOT_BOOTPART: default boot partition #
 # 
 # UBOOT_BOOTTYPE: default mmc
@@ -61,7 +59,6 @@ UBOOT_ROOT_mmc ?= "mmcblk1p2 ${UBOOT_ROOT_ARGS}"
 UBOOT_ROOT_nfs ?= "nfs ${UBOOT_ROOT_ARGS}"
 
 UBOOT_CONSOLE ?= ""
-UBOOT_BOOTDEV  ?= "0"
 UBOOT_BOOTPART ?= "1"
 UBOOT_ROOTDEV ?= ""
 UBOOT_ROOTPART ?= "2"
@@ -173,7 +170,6 @@ python create_uboot_boot_txt() {
 
             loadcmd = localdata.getVar('UBOOT_LOAD_CMD')
 
-            bootdev = localdata.getVar('UBOOT_BOOTDEV')
             boottype = localdata.getVar('UBOOT_BOOTTYPE')
             bootpart = localdata.getVar('UBOOT_BOOTPART')
 
@@ -214,11 +210,11 @@ python create_uboot_boot_txt() {
                             cfgfile.write("fi\n")
 
                 else:
-                    cfgfile.write("%s %s %s:%s %s %s%s\n" % (loadcmd, boottype, bootdev, bootpart, fdtaddr,bootprefix, fdtfile))
-                    cfgfile.write("%s %s %s:%s %s %s%s\n" % (loadcmd, boottype, bootdev, bootpart, kerneladdr, bootprefix, kernelname))
+                    cfgfile.write("%s %s ${devnum}:%s %s %s%s\n" % (loadcmd, boottype, bootpart, fdtaddr,bootprefix, fdtfile))
+                    cfgfile.write("%s %s ${devnum}:%s %s %s%s\n" % (loadcmd, boottype, bootpart, kerneladdr, bootprefix, kernelname))
 
                 if initrd:
-                    cfgfile.write("%s %s %s:%s %s %s%s\n" % (loadcmd, boottype, bootdev, bootpart, initrdaddr, bootprefix, initrdname))
+                    cfgfile.write("%s %s ${devnum}:%s %s %s%s\n" % (loadcmd, boottype, bootpart, initrdaddr, bootprefix, initrdname))
 
 
             cfgfile.write("%s %s %s %s\n" % (imgbootcmd, kerneladdr, initrdaddr, fdtaddr))
