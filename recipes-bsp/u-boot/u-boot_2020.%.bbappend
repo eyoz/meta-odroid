@@ -23,7 +23,6 @@ SRC_URI_append_odroid-n2 = "\
     file://odroid-n2/aml_encrypt_g12b \
     file://odroid-n2/bl2.bin \
     file://odroid-n2/bl30.bin \
-    file://odroid-n2/bl31.bin \
     file://odroid-n2/bl31.img \
     file://odroid-n2/ddr3_1d.fw \
     file://odroid-n2/ddr4_1d.fw \
@@ -68,7 +67,8 @@ do_compile_append_odroid-n2 () {
                     --output ${B}/bl31.img.enc \
                     --level v3 --type bl31
 
-    ./aml_encrypt_g12b --bl3sig --input ${B}/${UBOOT_BINARY} --compress lz4 \
+    mv ${B}/u-boot.bin ${B}/bl33.bin
+    ./aml_encrypt_g12b --bl3sig --input ${B}/bl33.bin --compress lz4 \
                     --output ${B}/bl33.bin.enc \
                     --level v3 --type bl33 --compress lz4
 
