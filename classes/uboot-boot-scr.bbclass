@@ -25,8 +25,6 @@
 #
 # UBOOT_ROOTPART: default root device #
 #
-# UBOOT_ROOTTYPE:  default mmcblk1p
-#
 # UBOOT_FILE_TITLE: default partition, e.g., "UBOOT-CONFIG"
 #
 # UBOOT_EXTRA_ENV: default add extra env vars , e.g., "vout,'vga'"
